@@ -268,9 +268,12 @@ def return_overview(
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--transport", default="stdio")
     args = parser.parse_args()
+
     mcp.run(transport=args.transport)
+
 
 
