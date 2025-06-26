@@ -267,4 +267,10 @@ def return_overview(
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    mcp.run(
+        transport="http",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", 8000)),  # Cloud platforms often inject PORT
+        path="/mcp"  # Required for OpenAI remote MCP tool URL
+    )
+
