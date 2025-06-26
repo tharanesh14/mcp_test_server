@@ -1,24 +1,18 @@
-# Base image
+# Use a minimal Python image
 FROM python:3.11-slim
 
-# Set work directory
+# Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y gcc curl
-
-# Copy requirements and install
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the app code
+# Copy source code
 COPY . .
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
-
-# Set default port (optional for MCP over HTTP)
+# Expose MCP server port
 EXPOSE 8000
 
-# Run the MCP server using HTTP transport (not stdio)
+# Run MCP with HTTP transport
 CMD ["python", "server.py", "--transport", "http"]
